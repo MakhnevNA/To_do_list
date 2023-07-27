@@ -9,13 +9,8 @@ import '../../styled/font.css'
 class CardItem extends Component {
 	
 	state = {
-		data: [
-			{cardId: 0, textId: 0, name: "Nikita"},
-		],
+		data: [],
 		maxId: 0
-		
-
-
 	}
 
 	addCardText = () => {
@@ -24,7 +19,7 @@ class CardItem extends Component {
 		const { data, maxId} = this.state
 
 		const newCardText = [{
-			cardId: 0,
+			cardId: 0, // тут потом нужно будет как-то поменять, так как будут ведь еще и другие карточки, а у них это значение должно быть другое
 			textId: maxId + 1,
 			name: name
 		}]
@@ -49,24 +44,21 @@ class CardItem extends Component {
 		})
 
 		return (
-			<>
-				<div className="card__item" key = {data.cardId}>
-					<div className="card__title">
-						<div className="card__name">{cardName}</div>
-						<div className="card__option">
-							<div className="card__option-addthis"><span className="icon-addthis" onClick ={this.addCardText}></span></div>
-							<div className="card__option-pencil"><span className="icon-pencil"></span></div>
-							<div className="card__option-bin"><span className="icon-bin"></span></div>
-						</div>
-					</div>
-					<div className="card__content">
-						{element}
+			<div className="card__item" key = {data.cardId}>
+				<div className="card__title">
+					<div className="card__name">{cardName}</div>
+					<div className="card__option">
+						<div className="card__option-addthis"><span className="icon-addthis" onClick ={this.addCardText}></span></div>
+						<div className="card__option-pencil"><span className="icon-pencil"></span></div>
+						<div className="card__option-bin"><span className="icon-bin"></span></div>
 					</div>
 				</div>
-			</>
+				<div className="card__content">
+					{element}
+				</div>
+			</div>
 		)
 	}
-	
 }
 
 
