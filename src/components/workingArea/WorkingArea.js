@@ -10,6 +10,7 @@ class WorkingArea extends Component {
 	state = {
 		dataCard: [],
 		maxCardId: 0
+		
 	}
 
 	onAddItem = () => {
@@ -28,13 +29,34 @@ class WorkingArea extends Component {
 		}))
 	}
 
+	deleteCard = (cardId, dataCard) => {
+
+		const confirm = window.confirm('Вы уверены, что хотите удалить эту карточку?')
+
+		if (confirm) {
+			this.setState(() => {
+				return {
+					dataCard: dataCard.filter(item => item.cardId !== cardId)
+				}
+			})
+		}
+
+	}
+
 	render() {
 
 		const {dataCard} = this.state
 
 		const element = dataCard.map((item) => {
+
+			const { cardName, cardId } = item
+			
 			return (
-				<CardItem cardName={item.cardName} key={item.cardId} />
+				<CardItem
+					cardName={cardName}
+					key={cardId}
+					onDeleteCard={() => this.deleteCard(cardId, dataCard)}
+				/>
 			)
 		})
 

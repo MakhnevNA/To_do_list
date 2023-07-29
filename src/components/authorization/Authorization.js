@@ -68,9 +68,6 @@ class Login extends Component{
 						flexDirection: "column",
 						alignItems: "center",
 						backgroundColor: "white",
-						// boxShadow: "0 8px 16px -12px rgba(#0f0e13, 0.5)",
-						// borderTop: "1px solid rgba(#ffffff, 0.05)",
-						// backdropFilter: "blur(80px) brightness(1.25)"
 					}}
 					
 				>

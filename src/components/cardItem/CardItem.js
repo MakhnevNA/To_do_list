@@ -31,15 +31,65 @@ class CardItem extends Component {
 	}
 
 
+	// deleteCardText = (e) => {
+
+	// 	// const confirm = window.confirm('Вы уверены, что хотите удалить эту карточку?')
+
+	// 	const { data } = this.state
+
+	// 	// const id = e.currentTarget.parentNode.parentNode.parentNode.parentNode
+	// 	const id = data.cardId
+
+	// 	console.log(id)
+
+	// 	// if (confirm) {
+	// 	// 	this.setState(({ data }) => {
+	// 	// 		return {
+	// 	// 			data: data.filter(item => item.cardId !== data.cardId)
+	// 	// 		}
+	// 	// 	})
+	// 	// }
+
+		
+
+	// }
+
+	// dDeleteCard = (cardId) => {
+
+	// 	const confirm = window.confirm('Вы уверены, что хотите удалить эту карточку?')
+
+	// 	// const { data } = this.state
+
+	// 	// const id = e.currentTarget.parentNode.parentNode.parentNode.parentNode
+	// 	// const id = data.cardId
+
+	// 	console.log(cardId)
+
+	// 	if (confirm) {
+	// 		this.setState(({ data }) => {
+	// 			return {
+	// 				data: data.filter(item => item.cardId !== cardId)
+	// 			}
+	// 		})
+	// 	}
+
+		
+
+	// }
+
+
 	render() {
 
-		const { cardName } = this.props
+		const { cardName, onDeleteCard} = this.props
 	
 		const { data } = this.state
 		
 		const element = data.map(item => {
+
+			const {name, textId} = item
+
 			return (
-				<CardText name={item.name} key = {item.textId} />
+				<CardText name={name} key = {textId} />
 			)
 		})
 
@@ -48,9 +98,24 @@ class CardItem extends Component {
 				<div className="card__title">
 					<div className="card__name">{cardName}</div>
 					<div className="card__option">
-						<div className="card__option-addthis"><span className="icon-addthis" onClick ={this.addCardText}></span></div>
-						<div className="card__option-pencil"><span className="icon-pencil"></span></div>
-						<div className="card__option-bin"><span className="icon-bin"></span></div>
+						<div className="card__option-addthis" >
+							<span
+								className="icon-addthis"
+								onClick={this.addCardText}
+							></span>
+						</div>
+						<div className="card__option-pencil">
+							<span
+								className="icon-pencil"
+							></span>
+						</div>
+						<div className="card__option-bin">
+							<span
+								className="icon-bin"
+								onClick={onDeleteCard}
+							>
+							</span>
+						</div>
 					</div>
 				</div>
 				<div className="card__content">
