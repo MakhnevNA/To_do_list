@@ -31,51 +31,25 @@ class CardItem extends Component {
 	}
 
 
-	// deleteCardText = (e) => {
+	deleteCardText = (textId, data) => {
 
-	// 	// const confirm = window.confirm('Вы уверены, что хотите удалить эту карточку?')
+		const confirm = window.confirm('Вы уверены, что хотите удалить этот пункт?')
 
-	// 	const { data } = this.state
+		// const { data } = this.state
 
-	// 	// const id = e.currentTarget.parentNode.parentNode.parentNode.parentNode
-	// 	const id = data.cardId
+		console.log(textId)
 
-	// 	console.log(id)
-
-	// 	// if (confirm) {
-	// 	// 	this.setState(({ data }) => {
-	// 	// 		return {
-	// 	// 			data: data.filter(item => item.cardId !== data.cardId)
-	// 	// 		}
-	// 	// 	})
-	// 	// }
+		if (confirm) {
+			this.setState(() => {
+				return {
+					data: data.filter(item => item.textId !== textId)
+				}
+			})
+		}
 
 		
 
-	// }
-
-	// dDeleteCard = (cardId) => {
-
-	// 	const confirm = window.confirm('Вы уверены, что хотите удалить эту карточку?')
-
-	// 	// const { data } = this.state
-
-	// 	// const id = e.currentTarget.parentNode.parentNode.parentNode.parentNode
-	// 	// const id = data.cardId
-
-	// 	console.log(cardId)
-
-	// 	if (confirm) {
-	// 		this.setState(({ data }) => {
-	// 			return {
-	// 				data: data.filter(item => item.cardId !== cardId)
-	// 			}
-	// 		})
-	// 	}
-
-		
-
-	// }
+	}
 
 
 	render() {
@@ -89,7 +63,7 @@ class CardItem extends Component {
 			const {name, textId} = item
 
 			return (
-				<CardText name={name} key = {textId} />
+				<CardText name={name} key={textId} onDeleteCardText={() => this.deleteCardText(textId, data)} />
 			)
 		})
 
