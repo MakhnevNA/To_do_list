@@ -43,6 +43,26 @@ class WorkingArea extends Component {
 
 	}
 
+	renameCard = (cardId, dataCard) => {
+
+		const newCardName = prompt('Введите новое название карточки', '')
+
+		this.setState(() => {
+			return {
+				dataCard: dataCard.map(item => { 
+
+					if (item.cardId === cardId) {
+						return { ...item, cardName: newCardName }
+					} else {
+						return {...item}
+					}
+				})
+			}
+		})
+
+	}
+
+
 	render() {
 
 		const {dataCard} = this.state
@@ -56,6 +76,7 @@ class WorkingArea extends Component {
 					cardName={cardName}
 					key={cardId}
 					onDeleteCard={() => this.deleteCard(cardId, dataCard)}
+					onRenameCard = {() => this.renameCard(cardId, dataCard)}
 				/>
 			)
 		})

@@ -24,7 +24,7 @@ class CardText extends Component {
 	render() {
 
 
-		const {onDeleteCardText}= this.props
+		const {onDeleteCardText, onRenameCardText}= this.props
 		return (
 			<div className="card__text" key ={this.props.id}>
 				<p>{this.props.name}</p>
@@ -32,10 +32,10 @@ class CardText extends Component {
 					<div className="card__text-pencil">
 						<span
 							className="icon-pencil"
-							onClick={this.onRenameCardText}
+							onClick={onRenameCardText}
 						></span>
 					</div>
-					<div className="card__text-bin" onClick ={onDeleteCardText}><span className="icon-bin"></span></div>
+					<div className="card__text-bin" ><span className="icon-bin" onClick ={onDeleteCardText}></span></div>
 				</div>
 			</div>
 		)

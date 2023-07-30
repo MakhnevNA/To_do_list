@@ -52,9 +52,29 @@ class CardItem extends Component {
 	}
 
 
+	renameCardText = (textId, data) => {
+
+		const newCardTextName = prompt('Введите новое название карточки', '')
+
+		this.setState(() => {
+			return {
+				data: data.map(item => { 
+
+					if (item.textId === textId) {
+						return { ...item, name: newCardTextName }
+					} else {
+						return {...item}
+					}
+				})
+			}
+		})
+
+	}
+
+
 	render() {
 
-		const { cardName, onDeleteCard} = this.props
+		const { cardName, onDeleteCard, onRenameCard} = this.props
 	
 		const { data } = this.state
 		
@@ -63,7 +83,11 @@ class CardItem extends Component {
 			const {name, textId} = item
 
 			return (
-				<CardText name={name} key={textId} onDeleteCardText={() => this.deleteCardText(textId, data)} />
+				<CardText
+					name={name}
+					key={textId}
+					onDeleteCardText={() => this.deleteCardText(textId, data)}
+					onRenameCardText={() => this.renameCardText(textId, data)} />
 			)
 		})
 
@@ -81,6 +105,7 @@ class CardItem extends Component {
 						<div className="card__option-pencil">
 							<span
 								className="icon-pencil"
+								onClick={onRenameCard}
 							></span>
 						</div>
 						<div className="card__option-bin">
