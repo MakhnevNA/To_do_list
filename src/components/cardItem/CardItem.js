@@ -13,6 +13,40 @@ class CardItem extends Component {
 		maxId: 0
 	}
 
+
+	// после обновления страницы проверяем ls и делаем maxId равным числу карточек, чтобы не сбилась нумерация key
+	// componentDidMount() {
+	// 	this.checkLocalStorage()
+	// 	this.setState(({data}) => ({
+	// 		maxId: data.length
+	// 	}))
+	// }
+
+	// 	// после обновления (перерерисовке) компонентов данные из массива карточек сохраняются в ls
+	// componentDidUpdate() {
+	// 	this.saveToLocalStorage()
+	// }
+
+	// 	// если в lS есть какие-то данные, то мы их от туда поулчим и запишем в наш массив
+	// checkLocalStorage = () => {
+	// 	if (localStorage.getItem('data')) {
+	// 		this.setState(() => ({
+	// 			data: JSON.parse(localStorage.getItem('data'))
+	// 		}))
+	// 	}
+	// }
+
+
+	// saveToLocalStorage = () => {
+	// 	localStorage.setItem('data', JSON.stringify(this.state.data))
+	// }
+
+
+
+
+
+
+
 	addCardText = () => {
 
 		const name = prompt('Введите название карточки', '')

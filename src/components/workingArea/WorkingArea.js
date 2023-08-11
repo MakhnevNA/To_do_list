@@ -9,9 +9,41 @@ class WorkingArea extends Component {
 
 	state = {
 		dataCard: [],
-		maxCardId: 0
+		maxCardId: 0,
 		
 	}
+
+		// после обновления страницы проверяем ls и делаем maxCardID равным числу карточек, чтобы не сбилась нумерация key
+	componentDidMount() {
+		this.checkLocalStorage()
+
+	}
+
+		// после обновления (перерерисовке) компонентов данные из массива карточек сохраняются в ls
+	componentDidUpdate() {
+		this.saveToLocalStorage()
+	}
+
+		// если в lS есть какие-то данные, то мы их от туда получим и запишем в наш массив
+	checkLocalStorage = () => {
+		if (localStorage.getItem('dataCard')) {
+			this.setState(() => ({
+				dataCard: JSON.parse(localStorage.getItem('dataCard')),
+				maxCardId: JSON.parse(localStorage.getItem('maxCardId'))
+			}))
+		}
+	}
+
+
+	saveToLocalStorage = () => {
+		localStorage.setItem('dataCard', JSON.stringify(this.state.dataCard))
+		localStorage.setItem('maxCardId', JSON.stringify(this.state.maxCardId))
+	}
+
+
+
+
+
 
 	onAddItem = () => {
 		const cardName = prompt('Введите название карточки', '');
@@ -27,6 +59,7 @@ class WorkingArea extends Component {
 			dataCard: [...dataCard, ...newCard],
 			maxCardId: maxCardId + 1
 		}))
+
 	}
 
 	deleteCard = (cardId, dataCard) => {

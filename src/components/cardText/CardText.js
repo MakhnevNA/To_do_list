@@ -26,7 +26,7 @@ class CardText extends Component {
 
 		const {onDeleteCardText, onRenameCardText}= this.props
 		return (
-			<div className="card__text" key ={this.props.id}>
+			<div className="card__text" key ={this.props.id} draggable = 'true'>
 				<p>{this.props.name}</p>
 				<div className="card__text-active">
 					<div className="card__text-pencil">

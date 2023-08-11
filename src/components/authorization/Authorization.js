@@ -16,25 +16,49 @@ class Authorization extends Component {
 	state = {
 		view: false,
 		login: false,
-		email: null,
-		password: null
+		email: '',
+		password: ''
 	}
 
 	checkValue = (e) => {
 		this.setState({
-			[e.target.name]: e.currentTarget.value
+			[e.target.id]: e.currentTarget.value
 		})
 	}
 
 	submitForm = (e) => {
 		e.preventDefault()
-		if ((this.state.email === "admin") && (this.state.password === "admin")) {
-			this.setState(({ view }) => ({
-				view: !view,
-			}));
-		}
+
+		this.authWithEmailAndPassword(this.state.email, this.state.password)
+			.then(reg => {
+				if (reg === true) {
+					this.setState(() => ({
+						view: false,
+					}));
+				}
+			})
+			
+			
 	}
 
+	authWithEmailAndPassword = (email, password) => {
+		
+		const apiKey = "AIzaSyAIfQuuz0TZudCJQQMucHqJ3AHZLMgX7sw";
+
+		return fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
+			method: 'POST',
+			body: JSON.stringify({
+				email: email,
+				password: password,
+				returnSecureToken: true
+			}),
+			headers: {
+				'Content-type': 'application/json'
+			}
+		})
+		.then(res => res.json())
+		.then(data => data.registered)
+	}
 
 
 	render() {
@@ -53,7 +77,7 @@ class Authorization extends Component {
 class Login extends Component{
 
 	render() {
-		const {checkValue, onSubmitForm} = this.props
+		const { checkValue, onSubmitForm } = this.props
 
 		return (
 			<Container component="main" maxWidth="sm" >
@@ -81,16 +105,14 @@ class Login extends Component{
 							fullWidth
 							id="email"
 							label="Email Address"
-							name="email"
 							autoComplete="email"
-							onChange = {checkValue}
+							onChange={checkValue}
 							autoFocus
 						/>
 						<TextField
 							margin="normal"
 							required
 							fullWidth
-							name="password"
 							label="Password"
 							type="password"
 							id="password"
